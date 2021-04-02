@@ -1,10 +1,8 @@
 `SimpleButterKnife` 是参考于框架<a href="https://github.com/JakeWharton/butterknife">butterknife</a>手写的，主要实现了Android View初始化与点击事件绑定，使用相对简单些。
 
-### 基本使用
 
 一、在Application中的初始化
-
-(```
+```
 
 public class App extends Application {
 
@@ -16,11 +14,14 @@ public class App extends Application {
     }
 }
 
-```)
+```
+
 
 二、在Activity添加布局注解`@Builder`，其他与butterknife的使用是一样的
 
-(```
+
+
+```
 //xml布局注解
 @Builder(R.layout.activity_main)
 public class MainActivity extends AppCompatActivity {
@@ -59,5 +60,5 @@ public class MainActivity extends AppCompatActivity {
     }
 }
 
-```)
+```
 
