@@ -1,0 +1,14 @@
+apply plugin: 'java-library'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(path: ':annotations')
+    implementation 'com.squareup:javapoet:1.13.0'
+    //auto-service失效问题 https://blog.csdn.net/cpcpcp123/article/details/103871815
+    implementation 'com.google.auto.service:auto-service:1.0-rc7'
+
+
+
+}
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
