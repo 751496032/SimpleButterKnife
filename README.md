@@ -1,39 +1,63 @@
-# Android
+`SimpleButterKnife` 是参考于框架<a href="https://github.com/JakeWharton/butterknife">butterknife</a>手写的，主要实现了Android View初始化与点击事件绑定，使用相对简单些。
 
-#### 项目介绍
-{**以下是码云平台说明，您可以替换为您的项目简介**
-码云是开源中国推出的基于 Git 的代码托管平台（同时支持 SVN）。专为开发者提供稳定、高效、安全的云端软件开发协作平台
-无论是个人、团队、或是企业，都能够用码云实现代码托管、项目管理、协作开发。企业项目请看 [https://gitee.com/enterprises](https://gitee.com/enterprises)}
+### 基本使用
 
-#### 软件架构
-软件架构说明
+一、在Application中的初始化
+
+(```
+
+public class App extends Application {
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        // 初始化
+        XBinding.init(this);
+    }
+}
+
+```)
+
+二、在Activity添加布局注解`@Builder`，其他与butterknife的使用是一样的
+
+(```
+//xml布局注解
+@Builder(R.layout.activity_main)
+public class MainActivity extends AppCompatActivity {
+    //view初始化绑定
+    @BindView(R.id.tv_hello)
+    TextView mTvHello;
+    @BindView(R.id.tv_butter_knife)
+    TextView mTvButterKnife;
 
 
-#### 安装教程
-
-1. xxxx
-2. xxxx
-3. xxxx
-
-#### 使用说明
-
-1. xxxx
-2. xxxx
-3. xxxx
-
-#### 参与贡献
-
-1. Fork 本项目
-2. 新建 Feat_xxx 分支
-3. 提交代码
-4. 新建 Pull Request
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mTvHello.setText("hello x-binding");//222000
 
 
-#### 码云特技
+    }
 
-1. 使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2. 码云官方博客 [blog.gitee.com](https://blog.gitee.com)
-3. 你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解码云上的优秀开源项目
-4. [GVP](https://gitee.com/gvp) 全称是码云最有价值开源项目，是码云综合评定出的优秀开源项目
-5. 码云官方提供的使用手册 [http://git.mydoc.io/](http://git.mydoc.io/)
-6. 码云封面人物是一档用来展示码云会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+    //点击事件绑定
+    @OnClick({R.id.btn_show_hello,R.id.btn_show_butter_knife,R.id.btn_goto_user})
+    public void onViewClick(View view) {
+        switch (view.getId()){
+            case R.id.btn_show_hello:
+                String hello = mTvHello.getText().toString();
+                Toast.makeText(this, hello, Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.btn_show_butter_knife:
+                String butterKnife = mTvButterKnife.getText().toString();
+                Toast.makeText(this, butterKnife, Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.btn_goto_user:
+                startActivity(new Intent(this,UserActivity.class));
+                break;
+        }
+
+    }
+}
+
+```)
+
